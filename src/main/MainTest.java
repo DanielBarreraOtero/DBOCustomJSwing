@@ -11,8 +11,7 @@ import componentes.CJTextField;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
+import javax.swing.SwingConstants;
 
 public class MainTest extends JFrame {
 
@@ -49,8 +48,11 @@ public class MainTest extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		
-		CJTextField CJT = new CJTextField("Mi caja");
+		CJTextField CJT = new CJTextField("Mi caja",5);
+		CJT.setFiltro("00.00");
+		CJT.setHorizontalAlignment(SwingConstants.CENTER);
 		CJT.setBackground(Color.WHITE);
+		CJT.setColumns(50);
 		
 		contentPane.add(CJT);
 		
