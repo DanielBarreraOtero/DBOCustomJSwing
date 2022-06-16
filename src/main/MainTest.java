@@ -48,7 +48,7 @@ public class MainTest extends JFrame {
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		
-		CJTextField CJT = new CJTextField("Mi caja",5);
+		CJTextField CJT = new CJTextField("Mi caja", CJTextField.NUMERICO);
 		CJT.setFiltro("00.00");
 		CJT.setHorizontalAlignment(SwingConstants.CENTER);
 		CJT.setBackground(Color.WHITE);

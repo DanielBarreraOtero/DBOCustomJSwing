@@ -9,17 +9,16 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.Document;
 
 public class CJTextField extends JTextField {
 	
-	enum tipo {
-		ALFANUMERICO,
-		ALF_NUM_MAYUS,
-		SOLO_TEXTO,
-		SOLO_TEXTO_MAYUS,
-		NUMERICO,
-		FECHA
-	}
+	public static final int ALFANUMERICO = 0;
+	public static final int ALF_NUM_MAYUS = 1;
+	public static final int SOLO_TEXTO = 2;
+	public static final int SOLO_TEXTO_MAYUS = 3;
+	public static final int NUMERICO = 4;
+	public static final int FECHA = 5;
 
 	private static final long serialVersionUID = 1L;
 	private int tipo;
