@@ -5,20 +5,19 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.Document;
 
-public class CJTextField extends JTextField {
+public class CJTextField extends JFormattedTextField {
 	
-	public static final int ALFANUMERICO = 0;
-	public static final int ALF_NUM_MAYUS = 1;
-	public static final int SOLO_TEXTO = 2;
-	public static final int SOLO_TEXTO_MAYUS = 3;
-	public static final int NUMERICO = 4;
-	public static final int FECHA = 5;
+	public static final int ALFANUMERICO = 1;
+	public static final int ALF_NUM_MAYUS = 2;
+	public static final int SOLO_TEXTO = 3;
+	public static final int SOLO_TEXTO_MAYUS = 4;
+	public static final int NUMERICO = 5;
+	public static final int FECHA = 6;
 
 	private static final long serialVersionUID = 1L;
 	private int tipo;
