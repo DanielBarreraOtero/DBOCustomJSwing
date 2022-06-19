@@ -5,20 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
-import componentes.CJTextField;
+import componentes.cJTextField.CJTextField;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.text.FieldPosition;
-import java.text.Format;
 import java.text.ParseException;
-import java.text.ParsePosition;
 
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
@@ -58,18 +53,18 @@ public class MainTest extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		
-		CJTextField CJT = new CJTextField("Mi caja", CJTextField.ALF_NUM_MAYUS);
-		CJT.setFiltro("00.00");
-		CJT.setHorizontalAlignment(SwingConstants.CENTER);
-		CJT.setBackground(Color.WHITE);
+		CJTextField CJT = null;
 		try {
-			CJT.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##")));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			CJT = new CJTextField("Mi caja", CJTextField.NUMERICO_CEROS);
+		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		CJT.setColumns(50);
+		CJT.setHorizontalAlignment(JTextField.RIGHT);
+		CJT.setBackground(Color.WHITE);
+		
+		//TODO FALTA CAMBIAR LA HORIENTAZION DEL TEXTFIELD CUANDO EL TIPO SEA NUMERICO_CEROS
+//		CJT.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+//		CJT.setColumns(50);
 		
 		contentPane.add(CJT);
 		
@@ -83,16 +78,15 @@ public class MainTest extends JFrame {
 		
 		MaskFormatter mask = null;
 		try {
-			mask = new MaskFormatter("#,##0");
+			mask = new MaskFormatter("#,##");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		formattedTextField = new JFormattedTextField();
+		formattedTextField = new JFormattedTextField(mask);
 		formattedTextField.setColumns(10);
-		formattedTextField.setFormatterFactory(new DefaultFormatterFactory(mask));
+		
 		contentPane.add(formattedTextField);
 	}
-
+	
 }
