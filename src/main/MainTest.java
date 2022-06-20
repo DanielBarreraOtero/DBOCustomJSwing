@@ -55,7 +55,7 @@ public class MainTest extends JFrame {
 		
 		CJTextField CJT = null;
 		try {
-			CJT = new CJTextField("Mi caja", CJTextField.NUMERICO_CEROS);
+			CJT = new CJTextField("Mi caja", CJTextField.FECHA);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

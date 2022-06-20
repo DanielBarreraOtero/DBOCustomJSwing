@@ -1,9 +1,13 @@
 package componentes.cJTextField;
 
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
@@ -37,8 +41,8 @@ public class CJTextField extends JFormattedTextField {
 
 		this.tipo = tipo;
 	}
-	public AbstractFormatterFactory getFiltro() {
-		return getFormatterFactory();
+	public String getFiltro() {
+		return filtro;
 	}
 	public void setFiltro(String filtro) {
 		try {
@@ -87,15 +91,14 @@ public class CJTextField extends JFormattedTextField {
 		setColumns(10);
 		setBackground(Color.LIGHT_GRAY);
 
-		if (filtro != null && tipo!=NUMERICO_CEROS)
-			setFiltro(filtro);
+		if (filtro != null && tipo!=NUMERICO_CEROS) //No puede ser numerico ceros y tener un filtro, ya que numerico ceros  
+			setFiltro(filtro);							//ya usa un filtro y esto podriacrear conflictos
 		else if (filtro != null && tipo==NUMERICO_CEROS)
 			throw new Exception("No se puede usar un filtro con el tipo NUMERICO_CEROS.");
 
 		if (filtro == null && (tipo==ALF_NUM_MAYUS || tipo==SOLO_TEXTO || tipo==SOLO_TEXTO_MAYUS || tipo==NUMERICO))
-			setDocument(new DocumentCJT(tipo));
-
-		if (tipo==NUMERICO_CEROS) {
+			setDocument(new DocumentCJT(tipo));	//si usa cualquiera de estos tipos el documento se encarga de manejarlos
+		else if (tipo==NUMERICO_CEROS) { //sino, se crea un filtro para controlarlos
 			filtro = "#".repeat(cantEnteros);
 			
 			MaskFormatter mask = new MaskFormatter(filtro);
@@ -103,7 +106,33 @@ public class CJTextField extends JFormattedTextField {
 			setFiltro(mask);
 			
 		}
+		else if (tipo==FECHA) {
+			filtro = "##/##/####";
 
+			MaskFormatter mask = new MaskFormatter(filtro);
+			mask.setPlaceholderCharacter('0');
+			setFiltro(mask);
+			
+			addFocusListener(new FocusAdapter() { // añadimos un evento para validar la fecha cuando se pierda el foco
+				@Override
+				public void focusLost(FocusEvent e) {
+					int dia, mes, año;
+					
+					dia = Integer.parseInt(getText().substring(0, 2));
+					mes = Integer.parseInt(getText().substring(3, 5));
+					año = Integer.parseInt(getText().substring(6, 10));
+					
+					try {
+						LocalDate fecha = LocalDate.of(año, mes, dia);
+						setForeground(Color.green); // si la fecha esta bien, se pone el texto en verde
+					} catch (Exception e2) {
+						setForeground(Color.red);	// si la fecha esta mal, se pone el texto en rojo
+					}
+				}
+			});
+		}
+		
+		
 
 	}
 
