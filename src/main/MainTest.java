@@ -55,12 +55,22 @@ public class MainTest extends JFrame {
 		
 		CJTextField CJT = null;
 		try {
-			CJT = new CJTextField("Mi caja", CJTextField.FECHA);
+			CJT = new CJTextField("Mi caja", CJTextField.NUMERICO_CEROS);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		CJT.setHorizontalAlignment(JTextField.RIGHT);
 		CJT.setBackground(Color.WHITE);
+		CJT.setNumeros(3, 7);
+		System.out.println(CJT.getNumeros()[0]+","+CJT.getNumeros()[1]);
+		
+		//ESTE TROZO MODIFICA EL ASPECTO DEL FILTRO DE FECHA
+//		try {
+//			CJT.getMascara().setMask("##-##-####");
+//		} catch (ParseException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 		//TODO FALTA CAMBIAR LA HORIENTAZION DEL TEXTFIELD CUANDO EL TIPO SEA NUMERICO_CEROS
 //		CJT.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
